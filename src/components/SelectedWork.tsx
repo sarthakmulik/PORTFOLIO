@@ -5,51 +5,21 @@ import RevealText from '@/components/RevealText';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
+import { projects as DATA_PROJECTS } from '@/data/projects';
+
 // ─────────────────────────────────────────────────────────────────────────────
 // DATA
 // ─────────────────────────────────────────────────────────────────────────────
-const PROJECTS = [
-  {
-    slug:     'yqr',
-    num:      '01',
-    name:     'YQR',
-    tag:      'PRODUCT / ENGINEERING',
-    year:     '2026',
-    desc:     'A digital ordering ecosystem built around speed and clarity.',
-    src:      null as string | null,
-    color:    'rgba(155,28,28,0.12)',
-  },
-  {
-    slug:     'finance-os',
-    num:      '02',
-    name:     'FINANCE OS',
-    tag:      'SYSTEMS / UI',
-    year:     '2025',
-    desc:     'A high-density interface for complex financial operations.',
-    src:      null as string | null,
-    color:    'rgba(30,30,40,0.6)',
-  },
-  {
-    slug:     'studio-site',
-    num:      '03',
-    name:     'STUDIO SITE',
-    tag:      'MOTION / WEBGL',
-    year:     '2025',
-    desc:     'An immersive digital experience for a creative agency.',
-    src:      null as string | null,
-    color:    'rgba(20,20,20,0.8)',
-  },
-  {
-    slug:     'aura',
-    num:      '04',
-    name:     'AURA',
-    tag:      'HARDWARE INTERFACE',
-    year:     '2024',
-    desc:     'Embedded system UI for next-generation smart home devices.',
-    src:      null as string | null,
-    color:    'rgba(15,10,10,0.9)',
-  },
-] as const;
+const PROJECTS = DATA_PROJECTS.filter(p => p.featured).slice(0, 4).map((p, idx) => ({
+  slug:     p.slug,
+  num:      p.number,
+  name:     p.shortTitle || p.title,
+  tag:      p.category.replace('\n', ' '),
+  year:     p.year,
+  desc:     p.description,
+  src:      p.previewAsset || null,
+  color:    ['rgba(155,28,28,0.12)', 'rgba(30,30,40,0.6)', 'rgba(20,20,20,0.8)', 'rgba(15,10,10,0.9)'][idx % 4],
+}));
 
 const TOTAL    = PROJECTS.length;             // 4
 const SECTION_VH = 800;

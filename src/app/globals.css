@@ -308,3 +308,15 @@ body {
   animation: word-in 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
 
+
+/* IMAGE REVEAL COMPONENT */
+.reveal-image-wrapper {
+  clip-path: inset(8% 0 8% 0);
+  opacity: 0;
+  transition: clip-path 1000ms cubic-bezier(0.22, 1, 0.36, 1), opacity 800ms ease;
+}
+.reveal-image-wrapper.is-revealed {
+  clip-path: inset(0);
+  opacity: 1;
+}
+
